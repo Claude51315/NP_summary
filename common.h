@@ -25,5 +25,5 @@ int set_nonblock(int fd);
 int create_server(unsigned short port);
 int get_client_connection(int server_fd);
 /* client side*/
-int connent_server(char *ip, unsigned short port);
+int connect_server(char *ip, unsigned short port);
 #endif

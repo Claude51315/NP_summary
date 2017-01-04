@@ -71,7 +71,7 @@ int get_client_connection(int server_fd){
     }
     return client_fd;
 }
-int connent_server(char *ip, unsigned short port)
+int connect_server(char *ip, unsigned short port)
 {
     struct hostent *he;
     struct sockaddr_in s;

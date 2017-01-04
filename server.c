@@ -44,7 +44,13 @@ int main(int argc, char* argv[])
                 } else { // read msg from client
                     memset(msg_buf, '\0', BUF_LENGTH);
                     int count = read(i, msg_buf, BUF_LENGTH);
-                    write(i, msg_buf, count); 
+                    if(count > 0)
+                        write(i, msg_buf, count); 
+                    else if ( count == 0){
+                        printf("client disconnect\n");
+                        close(i);
+                        FD_CLR(i, &master);
+                    }
                 }
             }
         }
