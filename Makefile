@@ -1,10 +1,10 @@
 CC=gcc
 CFLAG= -Wall -g
-all: main
+all: server
 
-main: main.c
-	${CC} ${CFLAG} main.c common.c -o $@
+server: server.c
+	${CC} ${CFLAG} server.c common.c -o $@
 .phony: clean
 
 clean:
-	rm main
+	rm server
