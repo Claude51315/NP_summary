@@ -71,3 +71,30 @@ int get_client_connection(int server_fd){
     }
     return client_fd;
 }
+int connent_server(char *ip, unsigned short port)
+{
+    struct hostent *he;
+    struct sockaddr_in s;
+    int ret, fd;
+    memset(&s, 0, sizeof(s));
+    s.sin_family = AF_INET;
+    he = gethostbyname(ip);
+    if(he == NULL){
+        printf("invalid ip address\n");
+        return -1;
+    }
+    s.sin_addr = *((struct in_addr*)he->h_addr);
+    s.sin_port = htons(port);
+    fd = socket(AF_INET, SOCK_STREAM, 0);
+    if(fd < 0){
+        printf("socket error\n");
+        return -1;
+    }
+    ret = connect(fd, (struct sockaddr*)&s, sizeof(s));
+    if(ret < 0){
+        printf("connection error \n");
+        close(fd);
+        return -1;
+    }
+    return fd;
+}
